@@ -6,7 +6,7 @@ function PlaySound(id)
 
 $(document).ready(function()
 {
-	if(window.navigator.standalone == false)
+	if(window.navigator.standalone == false && config['needInstall'])
 	{
 		$("#divInstallGuide").show();
 		return;

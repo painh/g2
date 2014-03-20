@@ -12,6 +12,7 @@ $config["gameDivAlign"] = "center";
 $config["srcPath"] = "./";
 $config['showLogOnDebugger'] = true;
 $config['showLogOnConsole'] = true;
+$config['needInstall'] = false;
 
 $js_list = [
 	$config["srcPath"].'scene/effect.js',
