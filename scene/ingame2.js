@@ -9,7 +9,6 @@ var BLOCK_DISTANCE = 33;
 
 var g_coin = 10;
 var g_distance = 0;
-var g_gameOver = false;
 var g_myTeamMinPos = 11;
 
 function removeFromList(list, obj)
@@ -35,8 +34,6 @@ var g_imgs = [];
 var g_pickedObj = null;
 var SceneIngame = function()
 { 
-	this.turnTime = 0;
-
 	this.Start = function()
 	{
 
@@ -44,6 +41,15 @@ var SceneIngame = function()
 //		g_gameUI.Add(240, 70, 64, 32, '아래로', this, "goDown");
 //		g_gameUI.Add(240, 200, 64, 32, '앞으로', this, "goNext");
 //
+		var d = new Date();
+		var n = d.getTime(); 
+
+		this.turnTime = 0;
+		this.state = 'title';
+		this.title_cnt = 5; 
+		this.title_timer = n;
+
+		g_objList.Clear();
 		for(var i = 0; i < 21; ++i)
 			g_objList.Add(3, 0, 5, i, i, randomRange(0, 2));
 	}
@@ -54,8 +60,25 @@ var SceneIngame = function()
 	
 	this.Update = function()
 	{ 
-		if(g_gameOver)
+		if(this.state =='gameOver')
 			return;
+
+		if(this.state == 'title')
+		{
+			var d = new Date();
+			var n = d.getTime(); 
+
+			if(n - this.title_timer > 1000)
+			{
+				this.title_timer = n;
+				this.title_cnt--;
+
+				if(this.title_cnt == 0)
+					this.state = 'game';
+			}
+
+			return;
+		}
 
 		g_myTeamMinPos = g_objList.Update(g_myTeamMinPos);
 
@@ -207,13 +230,25 @@ var SceneIngame = function()
 
 		g_effectManager.Render();
 		Renderer.SetAlpha(1.0); 
+		if(this.state == 'title')
+		{
+			Renderer.SetAlpha(0.8); 
+			Renderer.SetColor("#000000"); 
+			Renderer.Rect(0, 0, Renderer.width, Renderer.height);
 
-		if(!g_gameOver)
-			return; 
+			Renderer.SetAlpha(1.0); 
+			Renderer.SetColor("#ffffff"); 
+			Renderer.SetFont('16pt Arial');
+			Renderer.Text(100, 200, this.title_cnt + " left"); 
+		}
 
-		Renderer.SetAlpha(1); 
-		Renderer.SetColor("#ff0000"); 
-		Renderer.SetFont('16pt Arial');
-		Renderer.Text(24, 150, "Game Over"); 
+		if(this.state == 'gameOver')
+		{
+			Renderer.SetAlpha(1); 
+			Renderer.SetColor("#ff0000"); 
+			Renderer.SetFont('16pt Arial');
+			Renderer.Text(24, 150, "Game Over"); 
+		}
+
 	} 
 };

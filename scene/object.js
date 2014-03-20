@@ -182,7 +182,10 @@ var Obj = function()
 
 var ObjManager = function()
 { 
-	this.m_list = [];
+	this.Clear = function()
+	{
+		this.m_list = [];
+	}
 
 	this.Add = function(hp, x, y, pos, name, type)
 	{
