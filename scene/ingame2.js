@@ -232,7 +232,7 @@ var SceneIngame = function()
 		Renderer.SetAlpha(1.0); 
 		if(this.state == 'title')
 		{
-			Renderer.SetAlpha(0.8); 
+			Renderer.SetAlpha(0.5); 
 			Renderer.SetColor("#000000"); 
 			Renderer.Rect(0, 0, Renderer.width, Renderer.height);
 

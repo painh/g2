@@ -30,18 +30,21 @@ $(document).ready(function()
 		}
 
 		var manifest = [
-			{id:"die", src:getSrc("male_scream_short")},
-			{id:"warrior_attack", src:getSrc("knife_impact_stab_head")},
-			{id:"fire_ball", src:getSrc("dragon_breathe_fire_001")},
-			{id:"normal_attack", src:getSrc("knife_slash_002")},
-			{id:"footstep", src:getSrc("work_boots_single_step_on_rock_salt")},
-			{id:"coinGet", src:getSrc("chocolate_coin_in_foil_wrapper_drop_on_table")},
-			{id:"coinOut", src:getSrc("50_and_20_pence_peice_coins_put_down_on_surface")}
- 
+//			{id:"die", src:getSrc("male_scream_short")},
+//			{id:"warrior_attack", src:getSrc("knife_impact_stab_head")},
+//			{id:"fire_ball", src:getSrc("dragon_breathe_fire_001")},
+//			{id:"normal_attack", src:getSrc("knife_slash_002")},
+//			{id:"footstep", src:getSrc("work_boots_single_step_on_rock_salt")},
+//			{id:"coinGet", src:getSrc("chocolate_coin_in_foil_wrapper_drop_on_table")},
+//			{id:"coinOut", src:getSrc("50_and_20_pence_peice_coins_put_down_on_surface")}
+// 
 		]; 
 
-		createjs.Sound.addEventListener("loadComplete", function() {});
-		createjs.Sound.registerManifest(manifest);
+		if(manifest.length > 0)
+		{
+			createjs.Sound.addEventListener("loadComplete", function() {});
+			createjs.Sound.registerManifest(manifest);
+		}
 	}, 1000); 
 } );
 
